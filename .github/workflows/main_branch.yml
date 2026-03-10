@@ -1,0 +1,33 @@
+name: Main Branch CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install mypy pylint pytest
+
+      - name: Run pytest
+        run: pytest tests/
+
+      - name: Run mypy
+        run: mypy app.py --ignore-missing-imports
+
+      - name: Run pylint
+        run: pylint app.py --disable=C0114,C0115,C0116,R0903,W0105
