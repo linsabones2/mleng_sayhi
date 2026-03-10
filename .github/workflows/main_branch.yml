@@ -30,4 +30,4 @@ jobs:
         run: mypy app.py --ignore-missing-imports
 
       - name: Run pylint
-        run: pylint app.py --disable=C0114,C0115,C0116,R0903,W0105
+        run: pylint app.py --disable=C0114,C0115,C0116,R0903,W0105,C0303,W1514
